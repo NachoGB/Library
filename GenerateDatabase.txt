@@ -1,0 +1,89 @@
+create database if not exists library;
+use library;
+create table if not exists location(
+    location_ID int auto_increment  not null,
+    room        int                 not null,
+    module      int                 not null,
+    shelf       int                 not null,
+    position    int                 not null,
+    primary key (location_ID)
+);
+
+create table if not exists books(
+    book_ID     int auto_increment  not null,
+    title       varchar(30)         not null,
+    isbn        long                not null,
+    author      varchar(40)         not null,
+    editorial   varchar(30),
+    category    varchar(40),
+    language    varchar(20),
+    created_at  int                 not null,
+    status      boolean             not null,
+    location_ID int                 not null,
+    primary key (book_ID),
+    foreign key (location_ID) references location(location_ID)
+);
+
+create table if not exists members(
+    member_ID                   int auto_increment  not null,
+    name                        varchar(20)         not null,
+    surname1                    varchar(40)         not null,
+    surname2                    varchar(40)         not null,
+    nickname                    varchar(20)         not null,
+    phone                       int(9)              not null,
+    address                     varchar(50)         not null,
+    password                    varchar(40)         not null,
+    member_type                 varchar(1)          not null,
+    next_allowed_reservation    date                not null,
+    primary key (member_ID)
+);
+
+create table if not exists reservations(
+    reservation_ID  int auto_increment  not null,
+    book_ID         int unique          not null,
+    member_ID       int                 not null,
+    initialDate     date                not null,
+    finalDate       date                not null,
+    realFinalDate   date                not null,
+    primary key (reservation_ID),
+    foreign key (book_ID) references books(book_ID),
+    foreign key (member_ID) references members(member_ID)
+);
+
+create table if not exists reservations_log(
+    reservation_ID  int                 not null,
+    book_ID         int                 not null,
+    member_ID       int                 not null,
+    initialDate     date                not null,
+    finalDate       date                not null,
+    realFinalDate   date                not null,
+    primary key (reservation_ID)
+);
+
+insert into location(room,module,shelf,position) values(1,1,1,1);
+insert into location(room,module,shelf,position) values(1,1,1,2);
+insert into location(room,module,shelf,position) values(1,1,1,3);
+insert into location(room,module,shelf,position) values(1,1,1,4);
+insert into location(room,module,shelf,position) values(1,1,1,5);
+insert into location(room,module,shelf,position) values(1,1,2,1);
+insert into location(room,module,shelf,position) values(1,1,2,2);
+insert into location(room,module,shelf,position) values(1,1,2,3);
+insert into location(room,module,shelf,position) values(1,1,2,4);
+insert into location(room,module,shelf,position) values(1,1,2,5);
+insert into location(room,module,shelf,position) values(1,1,3,1);
+insert into location(room,module,shelf,position) values(1,1,3,2);
+insert into location(room,module,shelf,position) values(1,1,3,3);
+insert into location(room,module,shelf,position) values(1,1,3,4);
+insert into location(room,module,shelf,position) values(1,1,3,5);
+insert into location(room,module,shelf,position) values(1,1,4,1);
+insert into location(room,module,shelf,position) values(1,1,4,2);
+insert into location(room,module,shelf,position) values(1,1,4,3);
+insert into location(room,module,shelf,position) values(1,1,4,4);
+insert into location(room,module,shelf,position) values(1,1,4,5);
+
+
+insert into books values(1,"luces de bohemia",255,"ramon del valle inclan","coleccion austral","drama","español",2342,1,1);
+insert into books values(2,"don quijote",324254,"juan de la cuesta","francisco de robles","novelas de aventuras","español",1615,1,2);
+
+insert into members values(1,"Paco","Perez","Pons","pacopons",658568587,"Ramón y Cajal","pacopons","m",'');
+insert into members values(2,"Pere","Perez","Pons","perepons",786676568,"Ramón y Cajal","perepons","l",'');

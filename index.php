@@ -18,7 +18,7 @@
     if(isset($_POST['b_insert_book'])){include('form/form_book_insert.php');}
     if(isset($_POST['book_insert'])){include('db/db_book_insert.php');}
 
-    if(isset($_POST['b_addCart'])){include('db/db_cart_insert.php');}
+    if(isset($_POST['b_addCart'])){include('db/db_cart_insert.php');include('ajax/addSession.php');include('ajax/addCookie.php');}
 
     //Button to update when i search a book
     if(isset($_POST['b_book_update'])){include('form/form_book_update.php');}

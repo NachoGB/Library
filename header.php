@@ -11,9 +11,15 @@
 <html>
 <head>
     <title>Nacho Library</title>
+    <link rel="icon" href="./img/Logo Library.png" type="image/x-icon"/>
     <link rel="stylesheet" type="text/css" href="./style/styles.css" />
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript" src="./ajax/showTime.js"></script>
     <script type="text/javascript" src="./ajax/showCart.js"></script>
+    <script type="text/javascript" src="./ajax/addLocalStorage.js"></script>
+    <script type="text/javascript" src="./ajax/weather.js"></script>
+    <script type="text/javascript" src="./ajax/suggestions.js"></script>
 </head>
 
 <body>
@@ -32,10 +38,28 @@
             ?>
         </div>
         <?php
-            if($member_type!='g'){
+            if($member_type=='g'){
         ?>
         <div id="buttonCart">
-            <button id="carritoCompra" onclick="showCart()"></button>
+            <button id="carritoCompra" onclick="showCartGuest()"></button>
+        </div>
+        <?php
+            }else{
+        ?>
+        <div id="buttonCart">
+            <div id="cartDB">
+                <button id="carritoCompra" onclick="showCart()"></button>
+                <p>DB</p>
+            </div>
+            <div id="cartSession">
+                <button id="carritoCompra" onclick="showCartSession()"></button>
+                <p>Session</p>
+            </div>
+            <div id="cartCookie">
+                <button id="carritoCompra" onclick="showCartCookie()"></button>
+                <p>Cookie</p>
+            </div>
+            <button id="weather" onclick="weather()">Weather</button>
         </div>
         <?php
             }

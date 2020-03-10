@@ -32,7 +32,8 @@
                     echo "<button type='submit' class=b_addCart name='b_addCart' value='".$book['book_ID']."'></button>";
                 }
                 if($member_type=='g'){
-                    echo "<div></div>"; //I put this empty div for better appearing.
+                    echo "<div class='buttons_book'><form method='POST'>";
+                    echo "<button type='submit' class=b_addLocalStorage name='b_addLocalStorage' onclick=addLocalStorage(".$book['book_ID'].")></button>";
                 }
                 echo "</form></div></div>";
             }

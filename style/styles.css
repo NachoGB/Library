@@ -72,6 +72,27 @@ header{
     border-width: 0 1px 1px 1px;
     margin: 0 10px 0 10px;
     width: 100%;
+    display: flex;
+}
+
+#nav form{
+    width: 100%;
+    display: flex;
+}
+
+.separator{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.separator input{
+    height: 100%;
+}
+
+.separator div{
+    height: 100%;
 }
 
 #carritoCompra{
@@ -121,11 +142,6 @@ header{
     background: rgb(209, 61, 61);
 }
 
-.separator{
-    display: flex;
-    justify-content: space-between;
-}
-
 #buttonCart{
     display: flex;
     justify-content: end;
@@ -133,6 +149,16 @@ header{
     border-right: black 1px solid;
     border-bottom: black 1px solid;
     margin-right: 10px;
+    text-align: center;
+}
+
+#buttonCart div{
+    margin-right: 2px;
+    margin-left: 2px;
+}
+
+#buttonCart div p{
+    margin: 0;
 }
 
 #searchingBar{
@@ -219,12 +245,12 @@ header{
     margin-left: 10px;
 }
 
-.b_addCart{
+.b_addCart, .b_addLocalStorage{
     background: url(../img/AñadirCarrito.png);
     margin-left: 10px;
 }
 
-.b_book_update, .b_book_remove, .b_reservation, .b_addCart {
+.b_book_update, .b_book_remove, .b_reservation, .b_addCart, .b_addLocalStorage {
     width: 20px;
     height: 20px;
     background-size: 20px 20px;
@@ -334,6 +360,7 @@ header{
     display: flex;
     align-items: center;
     flex-direction: column;
+    margin-top: 50px;
 }
 
 #bComprar{
@@ -350,4 +377,8 @@ header{
 #totalPrice{
     font-weight: bold;
     text-align: center;
+}
+
+#ui-id-1 li{
+    list-style-type: none;
 }
