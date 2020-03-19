@@ -1,4 +1,5 @@
-create database if not exists library;
+drop database if exists library;
+create database if not exists library character set utf8 collate utf8_general_ci;
 use library;
 create table if not exists location(
     location_ID int auto_increment  not null,
@@ -8,7 +9,6 @@ create table if not exists location(
     position    int                 not null,
     primary key (location_ID)
 );
-
 create table if not exists books(
     book_ID     int auto_increment  not null,
     title       varchar(30)         not null,
@@ -20,10 +20,12 @@ create table if not exists books(
     created_at  int                 not null,
     status      boolean             not null,
     location_ID int                 not null,
+    net_price   float               default 20,
+    /*vat         float               default 2,*/
+    books_sell  int                 default 10,
     primary key (book_ID),
     foreign key (location_ID) references location(location_ID)
 );
-
 create table if not exists members(
     member_ID                   int auto_increment  not null,
     name                        varchar(20)         not null,
@@ -37,7 +39,6 @@ create table if not exists members(
     next_allowed_reservation    date                not null,
     primary key (member_ID)
 );
-
 create table if not exists reservations(
     reservation_ID  int auto_increment  not null,
     book_ID         int unique          not null,
@@ -49,7 +50,6 @@ create table if not exists reservations(
     foreign key (book_ID) references books(book_ID),
     foreign key (member_ID) references members(member_ID)
 );
-
 create table if not exists reservations_log(
     reservation_ID  int                 not null,
     book_ID         int                 not null,
@@ -58,6 +58,26 @@ create table if not exists reservations_log(
     finalDate       date                not null,
     realFinalDate   date                not null,
     primary key (reservation_ID)
+);
+create table if not exists cart(
+    member_ID   int                 not null,
+    book_ID     int                 not null,
+    quantity    int                 not null,
+    created_on  date                not null,
+    primary key (member_ID,book_ID),
+    foreign key (book_ID) references books(book_ID),
+    foreign key (member_ID) references members(member_ID)
+);
+create table if not exists orders(
+    order_ID    varchar(30)         not null,
+    member_ID   int                 not null,
+    book_ID     int                 not null,
+    quantity    int                 not null,
+    price       float               not null,
+    order_date  datetime            not null,
+    primary key (member_ID,book_ID,order_date),
+    foreign key (book_ID) references books(book_ID),
+    foreign key (member_ID) references members(member_ID)
 );
 
 insert into location(room,module,shelf,position) values(1,1,1,1);
@@ -82,8 +102,13 @@ insert into location(room,module,shelf,position) values(1,1,4,4);
 insert into location(room,module,shelf,position) values(1,1,4,5);
 
 
-insert into books values(1,"luces de bohemia",255,"ramon del valle inclan","coleccion austral","drama","español",2342,1,1);
-insert into books values(2,"don quijote",324254,"juan de la cuesta","francisco de robles","novelas de aventuras","español",1615,1,2);
+insert into books values(1,"luces de bohemia",255,"ramon del valle inclan","coleccion austral","drama","español",2342,1,1,20,10);
+insert into books values(2,"don quijote",324254,"juan de la cuesta","francisco de robles","novelas de aventuras","español",1615,1,2,20,10);
+insert into books values(3,"don quijote2",324254,"juan de la cuesta","francisco de robles","novelas de aventuras","español",1616,1,3,20,10);
+insert into books values(4,"don quijote3",324254,"juan de la cuesta","francisco de robles","novelas de aventuras","español",1617,1,4,20,10);
+insert into books values(5,"don quijote4",324254,"juan de la cuesta","francisco de robles","novelas de aventuras","español",1618,1,5,20,10);
 
 insert into members values(1,"Paco","Perez","Pons","pacopons",658568587,"Ramón y Cajal","pacopons","m",'');
 insert into members values(2,"Pere","Perez","Pons","perepons",786676568,"Ramón y Cajal","perepons","l",'');
+insert into members values(3,"Nacho","Perez","Pons","nacho",845268751,"Ramón y Cajal","nacho","l",'');
+insert into members values(4,"Nacho","Perez","Pons","nacho1",452156985,"Ramón y Cajal","nacho1","m",'');

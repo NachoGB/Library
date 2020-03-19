@@ -59,7 +59,12 @@
                 <button id="carritoCompra" onclick="showCartCookie()"></button>
                 <p>Cookie</p>
             </div>
-            <button id="weather" onclick="weather()">Weather</button>
+            <div id="weatherDiv">
+                <form action="" method="POST">
+                    <button type="submit" id="weather" name="weather"></button>
+                </form>
+                <p>Weather</p>
+            </div>
         </div>
         <?php
             }

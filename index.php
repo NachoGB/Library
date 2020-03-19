@@ -38,6 +38,8 @@
     if(isset($_POST['finishReservation'])){include('db/db_finish_reservation.php');}
 
     if(isset($_POST['order_insert'])){include('db/db_order_insert.php');}
+
+    if(isset($_POST['weather'])){include('form/form_weather_city.php');}
 ?>
 
 <?php include('footer.php') ?>

@@ -75,7 +75,7 @@ function removeCookie(){
 }
 
 function generateTableGuest(){
-    document.getElementById("content").innerHTML=""
+    document.getElementById("content").innerHTML="";
     var content = document.getElementById("content");
     var div = document.createElement('div');
     div.id="containerTable";
